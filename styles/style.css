@@ -4,6 +4,7 @@ html {
   /* Google fonts 输出的 CSS */
   font-family: 'Noto Sans SC', serif;
 }
+
 h2 {
   font-size: 30px;
   text-align: center;
@@ -14,4 +15,16 @@ p, li {
   /* line-height 后面可以跟不同的参数，如果是数字，就是当前字体大小乘上数字 */
   line-height: 2;
   letter-spacing: 1px;
+}
+
+html {
+  background-color: #00539F;
+}
+
+body {
+  width: 600px;
+  margin: 0 auto;
+  background-color: #FF9500;
+  padding: 0 20px 20px 20px;
+  border: 5px solid black;
 }
