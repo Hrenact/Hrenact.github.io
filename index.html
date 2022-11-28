@@ -9,22 +9,77 @@
     <script src="scripts/main.js" defer></script>
   </head>
   <body>
-    <h1><strong>WhiteYoke</strong> 的测试网站</h1>
-    <img src="images/white_yoke.png" alt="My test image">
+    <header>
+      <h1>WhiteYoke的个人网站</h1>
+    </header>
 
-    <p>你可以在以下地方找到我的<em>影子</em>：</p>
+    <nav>
+      <form>
+        <div style="color:rgb(255, 255, 255);font-weight: 600;"></div>
+          <script>
+            // 1.获取元素
+            var div = document.querySelector('div');
+            // 2. 得到当前的小时数
+            var nowTime = new Date();
+            var h = nowTime.getHours();
+            // 3. 判断小时数,改变文字信息
+            if (h <= 4) {
+            div.innerHTML = "<h3>夜已深, 注意休息哦!</h3>"
+              } else if (h <= 7) {
+            div.innerHTML = "<h3>唔哇, 你起的好早!</h3>"
+              } else if (h <= 12) {
+            div.innerHTML = "<h3>早起的虫子有鸟吃, 早上好!</h3>"
+              } else if (h <= 13) {
+            div.innerHTML = "<h3>诶嘿嘿, 是时候睡午觉咯!</h3>"
+              } else if (h <= 18) {
+            div.innerHTML = "<h3>午安呐! 要是还很困的话泡杯咖啡吧~</h3>"
+              } else if (h <= 21) {
+            div.innerHTML = "<h3>晚上好, 呐呐呐~</h3>"
+              } else {
+            div.innerHTML = "<h3>还在忙呀, 记得睡觉哦!</h3>"
+              }
+        </script>
+      </form>
+    </nav>
 
-    <ul>
-      <li>BiliBili</li>
-      <li>VRChat</li>
-      <li>McMod</li>
-      <li>Twitter</li>
-    </ul>
+    <main>
+
+      <!-- 包含一个 article（一篇文章） -->
+      <article>
+        <h3>Meta Quest VR一体机相关</h3>
+        <li>激活环境的搭建, 请前往 <a href="https://wwk.lanzoul.com/b03vg7pgj"title="密码: 6pkk"><strong>蓝奏云</strong></a> 来下载图文教程.</li>
+        <li>在登录电脑 Oculus 应用验证账户时报错, 错误代码 OVR40779122 , 请前往 <a href="https://so.csdn.net/wap?from=wap_blog_tag&q=ovr40779122"title="OVR40779122"><strong>CSDN</strong></a> 来寻找适合你的方法. (注: 其他报错按理来说同样适用, 未经验证.)</li>
+        <li>开机后遇卡透视, 黑屏等, 需要等待一段才能进入主界面, 在关机前关闭WiFi即可解决.</li>
+        <li>升级系统后可能会导致账号登录状态以及开发者状态失效, 如果你购买设备时选择了代激活服务, 并且出现了以上任意一种情况, 你需要及时联系服务提供商.</li>
+
+        <h3>Beat Saber/节奏光剑 相关</h3>
+        <li>全新的 Meta Quest2 购买时已附赠 Beat Saber , 你无需重新购买.</li>
+        <li>如果你购买了 Meta Quest2 的 Beat Saber , 但现在想在 Steam 上游玩, 你需要在 Steam 平台上重新购买.</li>
+        <li>Meta Quest2 原版 Beat Saber 并不支持导入自定义歌曲, 你需要通过 BMBF 或者 QuestPatcher 来实现自定义歌曲.</li>
+        <li>一些关于 Beat Saber 的问题, 比如如何导入自定义歌曲, 如何安装 MOD , 你可以在 WGzeyu 的 <a href="https://bs.wgzeyu.com/"title="WGzeyu"><strong>Beat Saber 基础教程与问题解答</strong></a> 上找到你想要的内容.</li>
+
+        <h3>Vitual Desktop/VD 相关</h3>
+        <li>请在 Quest 商店内购买 Vitual Desktop , 请勿购买 Steam 平台的 Vitual Desktop !</li>
+        <li>前往 Vitual Desktop <a href="https://www.vrdesktop.net/"title="Vitual Desktop">官网</a> 下载 PC 端 Vitual Desktop.</li>
+        <li>将你的 Quest2 和你的 PC 连接在同一网络下, 打开你 Quest2 内安装的 Vitual Desktop ,同时打开你在 PC 上安装的 Vitual Desktop , 等待一两分钟即可连接.</li>
+      </article>
+
+      <!-- 侧边栏在主内容右侧 -->
+      <aside>
+        <h2>相关链接</h2>
+        <ul>
+          <li><a href="https://github.com/Fndroid/clash_for_windows_pkg"title="Clash">Clash的Github地址</a></li>
+          <li><a href="https://developer.mozilla.org/zh-CN/docs/Web"title="MDN">此网页的参考教程地址</a></li>
+          <li><a href="#">待定……</a></li>
+          <li><a href="#">待定……</a></li>
+          <li><a href="#">待定……</a></li>
+        </ul>
+      </aside>
+
+    </main>
     
-    <p>还有更多……</p>
-    
-    <p>你可以单击 <a href="https://github.com/WhiteYoke/WhiteYoke.github.io"title="然而实际上我写的网页很垃圾"><strong>此处</strong></a> 来查看网站源码。</p>
+    <p>你可以单击 <a href="https://github.com/WhiteYoke/WhiteYoke.github.io"title="然而实际上我写的网页很垃圾"><strong>此处</strong></a> 来查看网站源码。本网站解释权归 <strong>白轭</strong> 所有。</p>
 
-    <button>切换用户</button>
+    
   </body>
 </html>
