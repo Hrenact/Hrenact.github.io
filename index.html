@@ -1,69 +1,124 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <title>中文咖啡厅封神榜</title>
-        <link href="https://fonts.font.im/css?family=Noto+Sans+SC" rel="stylesheet" type="text/css">
-        <link href="styles/style.css" rel="stylesheet">
-        <style>
-            body {
-                background-color: rgb(39, 39, 39);
-            }
-        </style>
-    </head>
 
-    <body>
-        <header>
-            <h1 style="color: white;" align="center">重生之我被咖啡厅拒绝了</h1>
-        </header>
-    </body>
+<head>
+    <meta charset="utf-8">
+    <title>中文咖啡厅封神榜</title>
+    <link href="https://fonts.font.im/css?family=Noto+Sans+SC" rel="stylesheet" type="text/css">
+    <link href="styles/style.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: rgb(39, 39, 39);
+        }
+    </style>
+</head>
 
-    <table width="85%" border="1" style="border-color: white;" cellspacing="0" cellpadding="10" align="center">
+<body>
+    <header>
+        <h1 style="color: white;" align="center">重生之我被咖啡厅拒绝了</h1>
+    </header>
+
+    <table width="85%" border="1" style="border-color: white;" cellspacing="0" cellpadding="10" align="center"
+        id="banlist_table">
         <tr class="tr-text">
             <th>名称</th>
             <th>原因</th>
             <th>日期</th>
         </tr>
-        <tr class="tr-text">
-            <td><a href="https://vrchat.com/home/user/usr_2498f36e-43ff-475d-a45e-90dcaa63a634"title="点击前往他的主页">冲冲冲 a788</a></td>
-            <td>口无遮掩，多次使用特效模，逆天言论。</td>
-            <td>04/28/2024 04:38 PM</td>
-        </tr>
-        <tr class="tr-text">
-            <td><a href="https://vrchat.com/home/user/usr_0f8a466e-302f-4e40-9f5b-62d15a67689a"title="点击前往他的主页">GasaiYuno`</a></td>
-            <td>在他人面前使用DPS组件并性骚扰店员。</td>
-            <td>05/01/2024 01:55 AM</td>
-        </tr>
-        <tr class="tr-text">
-            <td><a href="https://vrchat.com/home/user/usr_4d47e57e-7710-4546-9d94-e04f62527139"title="点击前往他的主页">Prk0</a></td>
-            <td>用画笔写政治宣言大字报。</td>
-            <td>05/01/2024 01:55 AM</td>
-        </tr>
-        <tr class="tr-text">
-            <td><a href="https://vrchat.com/home/user/usr_6b503fc3-b665-4ac6-94ed-2b84277f617b"title="点击前往他的主页">zikzom 617b</a></td>
-            <td>播放内容过于恶心/极端的视频。</td>
-            <td>05/04/2024 02:48 AM</td>
-        </tr>
-        <tr class="tr-text">
-            <td><a href="https://vrchat.com/home/user/usr_9719533d-cf80-4e85-a83f-2d4c4e6e76ad"title="点击前往他的主页">ᴊᴀʏᴄᴇ</a></td>
-            <td>发表种族歧视言论，逆天言论，口无遮掩。</td>
-            <td>05/05/2024 04:29 PM</td>
-        </tr>
-        <tr class="tr-text">
-            <td><a href="https://vrchat.com/home/user/usr_5d4bad80-8f4b-48ef-8c20-aae494c7a98c"title="点击前往他的主页">杰哥jay</a></td>
-            <td>当众侮辱他人，脏话满天飞，讨论现实R18内容。</td>
-            <td>05/05/2024 04:29 PM</td>
-        </tr>
-        <tr class="tr-text">
-            <td><a href="https://vrchat.com/home/user/usr_4b44c4e0-c746-43e7-998a-ab5c8882fe90"title="点击前往他的主页">demisedhex</a></td>
-            <td>当众侮辱他人，脏话满天飞，讨论现实R18内容。</td>
-            <td>05/05/2024 04:29 PM</td>
-        </tr>
-        <tr class="tr-text">
-            <td><a href="https://vrchat.com/home/user/usr_07c6f70c-daee-40c9-bbbc-d9041de058c3"title="点击前往他的主页">1419432004 58c3</a></td>
-            <td>群众举报：无脑爱国，逆天言论，毫无底线。</td>
-            <td>05/11/2024 07:03 PM</td>
-        </tr>
     </table>
+
+    <script>
+        /**
+         * @typedef {{username:string, reason: string, date: string, url: String}} BanUser
+         */
+
+        let tableEle = document.querySelector("#banlist_table");
+
+        start();
+
+        async function start() {
+            /**
+             * @description: 封禁列表
+             * @type {BanUser[] | boolean}
+             */
+            let banList = false;
+
+            while (true) {
+                // 获取封禁列表
+                banList = await getBanList();
+                // 获取失败则等待5秒后重新获取
+                if (banList === false) {
+                    await (new Promise((resolve, reject) => {
+                        setTimeout(() => {
+                            resolve();
+                        }, 5000);
+                    }));
+                    continue;
+                } else {
+                    break;
+                }
+            }
+
+            // 生成封禁列表表格
+            generateBanTable(banList);
+        }
+
+        /**
+         * @description: 获取封禁列表
+         * @return {BanUser[] | boolean}
+         */
+        async function getBanList() {
+            try {
+                let result = await (await fetch("banlist.json")).json();
+                return result;
+            } catch (e) {
+                return false;
+            }
+        }
+
+        /**
+         * @description: 生成黑名单表格
+         * @param {BanUser[]} banList
+         */
+        function generateBanTable(banList) {
+            banList.forEach(user => {
+                tableEle.appendChild(createBanTableRow(user));
+            })
+        }
+
+        /**
+         * @description: 创建黑名单用户行
+         * @param {BanUser} banUser
+         * @return {HTMLTableRowElement}
+         */
+        function createBanTableRow(banUser) {
+            let tableRow = document.createElement("tr");
+            tableRow.classList.add("tr-text");
+
+            // 用户名和链接
+            let usernameTd = document.createElement("td");
+            let usernameA = document.createElement("a");
+            usernameA.href = banUser.url;
+            usernameA.title = "点击前往他的主页";
+            usernameA.innerText = banUser.username;
+            usernameTd.appendChild(usernameA);
+
+            // 原因
+            let reasonTd = document.createElement("td");
+            reasonTd.innerText = banUser.reason;
+
+            // 时间
+            let dateTd = document.createElement("td");
+            dateTd.innerText = banUser.date;
+
+            tableRow.appendChild(usernameTd);
+            tableRow.appendChild(reasonTd);
+            tableRow.appendChild(dateTd);
+
+            return tableRow;
+        }
+
+    </script>
+</body>
 
 </html>
