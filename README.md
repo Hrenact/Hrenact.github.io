@@ -10,7 +10,7 @@
 4. 赞助者名单；
 5. 其它。
 
-日后可能会添加更多内容，敬请期待。
+你也可以在 **[这里](https://hrenact.github.io/UserRules/UserRules.html)** 来查看 《中文咖啡厅玩家守则》。
 
 ---
 
